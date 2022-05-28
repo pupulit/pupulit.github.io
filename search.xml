@@ -4,25 +4,32 @@
   
     
     <entry>
-      <title>内网渗透1</title>
-      <link href="/2022/05/27/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F1/"/>
-      <url>/2022/05/27/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F1/</url>
+      <title>Hexo部署和GitHub推送</title>
+      <link href="/2022/05/28/Hexo%E9%83%A8%E7%BD%B2%E5%92%8CGitHub%E6%8E%A8%E9%80%81/"/>
+      <url>/2022/05/28/Hexo%E9%83%A8%E7%BD%B2%E5%92%8CGitHub%E6%8E%A8%E9%80%81/</url>
       
-        <content type="html"><![CDATA[<h1 id="工作组"><a href="#工作组" class="headerlink" title="工作组"></a>工作组</h1><h1 id="域环境"><a href="#域环境" class="headerlink" title="域环境"></a>域环境</h1><ul><li><p>域控制器DC</p></li><li><p>活动目录AD（功能策略）</p></li></ul><h1 id="域："><a href="#域：" class="headerlink" title="域："></a>域：</h1><ul><li>单域</li><li>父域</li><li>子域</li><li>域数</li><li>域森林</li><li>Linux域环境：LDAP</li></ul><h1 id="内网测试流程"><a href="#内网测试流程" class="headerlink" title="内网测试流程"></a>内网测试流程</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>存活主机 域控制器 网络架构 服务接口 判断网络等</p><ol><li>判断域控：</li></ol><pre><code>ipconfig /all -dnsnet view /domainnet time /domain</code></pre><ol start="2"><li><p>用户和用户信息：利用凭据</p><pre><code>domain admins 域管理员 控制权domain computers 域内机器domain controllers 域控制器domain guest 域访客 低权限domain users 域用户enterprise admins 企业系统管理员用户 对域控有控制权</code></pre></li><li><p>凭据信息：密文，明文，口令 后续横的向渗透</p><pre><code>1 计算机用户hash 明文获取：mimikatz(win),mimipenguin(linux)2 计算机各种协议服务口令获取：lazagne(all),xenarmor(win)3 netsh wlan show profiles  netsh wlan show profile name=&quot;wifiname&quot; key=clear4 源码，备份文件，web管理入口，浏览器保持的密码，浏览器cookies,用户会话：3389 ipc$，回收站内容5 win保存的WiFi密码，网络内部的账号密码：Email VPN ftp oa ...</code></pre></li><li><p>域控架构探测</p><pre><code>1 域控制名：net time /domain nslookup ping2 域内存活主机：for /L %I in (1,1,254) DO @ping -w 1 -n 1 192.168.2.%I | findstr &quot;TTL=&quot;3 工具：nmap masscan Powershell---Nishang工具 empire ...</code></pre></li></ol><h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><h2 id="横向渗透"><a href="#横向渗透" class="headerlink" title="横向渗透*"></a>横向渗透*</h2><h2 id="权限维持"><a href="#权限维持" class="headerlink" title="权限维持"></a>权限维持</h2><h1 id="搭建环境："><a href="#搭建环境：" class="headerlink" title="搭建环境："></a>搭建环境：</h1><pre><code>域控DC:WIN2008R2fileserversqlserverwebserverpc</code></pre>]]></content>
+        <content type="html"><![CDATA[<h1 id="部署hexo"><a href="#部署hexo" class="headerlink" title="部署hexo"></a>部署hexo</h1><p>安装git</p><p>安装node.js</p><p>安装hexo：</p><pre><code class="bash">npm install -g hexo-clihexo init 安装目录cd 安装目录npm install</code></pre><h1 id="配置-config-yml文件"><a href="#配置-config-yml文件" class="headerlink" title="配置_config.yml文件"></a>配置_config.yml文件</h1><pre><code class="bash">deploy:  type: git  repo: https://github.com/name/name.github.io.git # GitHub仓库  branch: main # 分支  message: 123 # 自定义此次部署更新的说明,可不写</code></pre><h1 id="GitHub推送部署"><a href="#GitHub推送部署" class="headerlink" title="GitHub推送部署"></a>GitHub推送部署</h1><p>生成密钥</p><pre><code class="bash">git config --global user.email &quot;@qq.com&quot;git config --global user.name &quot;name&quot;ssh-keygen -t rsa -C &quot;@qq.com&quot;#复制生成的id_rsa.pub文件到GitHub</code></pre><h1 id="开始推送"><a href="#开始推送" class="headerlink" title="开始推送"></a>开始推送</h1><pre><code class="bash">#安装插件npm install hexo-deployer-git#初始化 git 仓库git init#推送hexo d # hexo deploy的缩写</code></pre><h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><p>GitHub被墙</p><pre><code class="bash">自己的梯子在本地的代理地址及端口号，一般为127.0.0.1:xxxx；关闭各种国产杀毒、清理软件，启动梯子；打开终端，依次输入：git config --global http.proxy http://127.0.0.1:xxxxgit config --global https.proxy https://127.0.0.1:xxxxhexo d 即可部署；最后取消代理，依次输入：git config --global --unset http.proxygit config --global --unset https.proxy</code></pre>]]></content>
       
-      
-      <categories>
-          
-          <category> 内网渗透 </category>
-          
-      </categories>
       
       
         <tags>
             
-            <tag> 内网渗透 </tag>
+            <tag> hexo </tag>
             
         </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>博客重构</title>
+      <link href="/2022/05/28/%E5%8D%9A%E5%AE%A2%E9%87%8D%E6%9E%84/"/>
+      <url>/2022/05/28/%E5%8D%9A%E5%AE%A2%E9%87%8D%E6%9E%84/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
       
     </entry>
     
